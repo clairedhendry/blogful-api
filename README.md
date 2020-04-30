@@ -24,3 +24,24 @@ Run the tests `npm test`
 ## Deploying
 
 When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+
+
+## Migrations
+
+Install driver (for Knex too) with npm i pg.
+Set up folder "migrations"
+Create files to start- 001.do.create<item>.sql
+                     - 001.undo.create<item>.sql
+In package.json, add to scripts - "migrate": "postgrator -- config postgrator-config.js"
+postgrator-config.js should have
+`require('dotenv').config()
+
+module.exports = {
+    "migrationsDirectory": "migrations",
+    "driver": "pg",
+    "connectionString": process.env.DB_URL
+}`
+
+npm run migrate -- <version of migration step>
+
+** to seed a database use ** psql -U <username> -d <database name> -f <seed file name>
