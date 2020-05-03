@@ -16,7 +16,8 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-app.use('/articles', ArticlesRouter)
+app.use('/api/articles', ArticlesRouter)
+
 
 app.use(function errorHandler(error, req, res, next) {
      let response
